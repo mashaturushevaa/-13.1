@@ -1,0 +1,28 @@
+rule "Multi-Sensor Simulation and Analytics"
+when
+    Time cron "0 * * * * ?" // Кожну хвилину
+then
+    // 1. Симуляція даних (додаємо випадковість до базової температури 20.0)
+    Group_Sensors.members.forEach[ sensor |
+        val newValue = 20.0 + (Math::random * 5.0) - 2.5
+        sensor.postUpdate(newValue)
+    ]
+
+    // 2. Розрахунок середнього значення
+    val avg = Group_Sensors.averageSince(now.minusMinutes(5)) as Number
+    Average_Temp.postUpdate(avg)
+
+    // 3. Аналіз тренду (порівнюємо поточне значення з тим, що було 10 хв тому)
+    val oldTemp = Sensor_1.historicState(now.minusMinutes(10)).state as Number
+    val currentTemp = Sensor_1.state as Number
+
+    if (currentTemp > oldTemp) {
+        Temperature_Trend.postUpdate("Зростання ↑")
+    } else if (currentTemp < oldTemp) {
+        Temperature_Trend.postUpdate("Зниження ↓")
+    } else {
+        Temperature_Trend.postUpdate("Стабільно")
+    }
+    
+    logInfo("Analytics", "Аналіз завершено. Середня: " + avg + ", Тренд: " + Temperature_Trend.state)
+end

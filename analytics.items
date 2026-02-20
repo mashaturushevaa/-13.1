@@ -1,0 +1,10 @@
+Group Group_Sensors
+
+Number Sensor_1 "Сенсор Тераса [%.1f °C]" <temperature> (Group_Sensors)
+Number Sensor_2 "Сенсор Кухня [%.1f °C]" <temperature> (Group_Sensors)
+Number Sensor_3 "Сенсор Вітальня [%.1f °C]" <temperature> (Group_Sensors)
+Number Sensor_4 "Сенсор Спальня [%.1f °C]" <temperature> (Group_Sensors)
+Number Sensor_5 "Сенсор Дитяча [%.1f °C]" <temperature> (Group_Sensors)
+
+Number Average_Temp "Середня температура [%.1f °C]" <line>
+String Temperature_Trend "Тренд [%s]" <trend>

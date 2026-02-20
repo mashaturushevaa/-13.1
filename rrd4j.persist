@@ -1,0 +1,10 @@
+Strategies {
+    everyMinute : "0 * * * * ?"
+    default = everyChange
+}
+
+Items {
+    // Зберігаємо всі сенсори та результати аналітики
+    Group_Sensors* : strategy = everyUpdate, everyMinute
+    Temperature_Trend : strategy = everyUpdate, everyMinute
+}

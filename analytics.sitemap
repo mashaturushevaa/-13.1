@@ -1,0 +1,10 @@
+sitemap analytics label="IoT Analytics Dashboard" {
+    Frame label="Поточні показники" {
+        Text item=Average_Temp
+        Text item=Temperature_Trend
+    }
+    Frame label="Аналітичні графіки" {
+        Chart item=Group_Sensors period=h refresh=60000
+        Chart item=Average_Temp period=h refresh=60000
+    }
+}
